@@ -1,0 +1,22 @@
+.page-header{
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+
+    .hide {
+        display: none;
+    }
+
+    .user-navbar{        
+        i{
+            cursor: pointer;
+        }
+
+        li{
+            list-style: none;
+            cursor: pointer;
+        }
+    }
+
+}
+
