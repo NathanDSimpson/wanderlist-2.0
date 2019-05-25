@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+
 
 class Register extends Component{
     state = {
@@ -22,15 +24,24 @@ class Register extends Component{
         event.preventDefault()
         const { firstname, lastname, email, password, confirmPassword } = this.state
         if (password !== confirmPassword){
-            alert(`Your passwords do not match`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Your passwords do not match'
+              })
             return
         }
         try {
-            const response = await axios.post('/auth/register', {firstname, lastname, email, password}) // register in out db
-            this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
-            this.props.history.push('/items')
+            await axios.post('/auth/register', {firstname, lastname, email, password})
+            // const response = await axios.post('/auth/register', {firstname, lastname, email, password}) // register in out db
+            // this.props.registerUser({firstname, lastname, email, id: response.data.user.id, authenticated: true})// dispatch to store
+            // this.props.history.push('/items')
         } catch(err){
-            alert(`Log In Failed.`)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Registration Failed'
+              })
         }
     }
 

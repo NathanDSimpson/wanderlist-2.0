@@ -38,7 +38,7 @@ app.use( express.static( `${__dirname}/../build` ) );
 //ENDPOINTS
 
 // // auth
-// app.post('/auth/register', controller.register) 
+app.post('/auth/register', controller.register) 
 // app.post('/auth/login', controller.login)
 // app.get('/auth/logout', controller.logout)
 // app.get('/auth/continue-session', controller.continueSession)

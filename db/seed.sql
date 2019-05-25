@@ -1,0 +1,7 @@
+-- create table users (
+--     user_id serial primary key not null,
+--     firstname varchar not null,
+--     lastname varchar,
+--     email varchar not null,
+--     hashed_password text not null
+-- );
