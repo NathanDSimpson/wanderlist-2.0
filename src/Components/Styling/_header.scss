@@ -10,10 +10,6 @@
     .user-menu{  
         justify-content: right;
 
-        i{
-            cursor: pointer;
-        }
-
         li{
             list-style: none;
             cursor: pointer;
@@ -23,6 +19,8 @@
         .user-icon{
             display: flex;
             justify-content: flex-end;
+            cursor: pointer;
+
         }
 
     }

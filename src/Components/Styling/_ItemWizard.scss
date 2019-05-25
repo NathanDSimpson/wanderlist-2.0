@@ -1,0 +1,27 @@
+.search-and-additem-bar{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.add-item{
+    cursor: pointer;
+}
+
+.item-icons{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-icon{
+    height: 18vw;
+    width: 18 vw;
+    img{
+        height: 13vw;
+        width: 14vw;
+    }
+}
+
+.item-name{
+    text-align: center;
+}

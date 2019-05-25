@@ -49,15 +49,16 @@ class Header extends Component{
                 )
         }
 
-        console.log(this.props)
         return(
             <header className='page-header'>
-                <div>WanderList</div>
+                <div>
+                    WanderList
+                </div>
                 <nav>
                     <div className='user-menu'>
-                        <div className='user-icon'>
+                        <div className='user-icon'  onClick={this.toggle_dropdown}>
                             <div>{this.props.authenticated ? this.props.firstname : null}</div>
-                            <i onClick={this.toggle_dropdown} className="fas fa-user"></i>
+                            <i className="fas fa-user"></i>
                         </div>
                         <ul>
                             {drowdownMenu}

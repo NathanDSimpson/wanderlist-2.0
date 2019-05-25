@@ -1,7 +1,15 @@
+@import './Components/Styling/inheritance';
+@import './Components/Styling/mixins';
+@import './Components/Styling/_variables';
 @import './Components/Styling/_header';
+@import './Components/Styling/ItemWizard';
 
 * {
   border: 1px solid silver;
+}
+
+.form-entry{
+  text-align: center;
 }
 
 //
