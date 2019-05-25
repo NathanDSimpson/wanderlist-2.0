@@ -28,23 +28,23 @@ module.exports = {
         }     
     },
 
-    // login: async (req, res) => {
-    //     const db = req.app.get('db')
-    //     const { session } = req
-    //     const { email, password } = req.body
-    //     try {
-    //         const credentials = await db.login({email})
-    //         const authorized = bcrypt.compareSync(password, credentials[0].hashed_password)
-    //         if (authorized){
-    //             session.user = credentials[0]
-    //             res.status(200).send({user: session.user})
-    //         } else {
-    //             throw new Error(401)
-    //         }
-    //     } catch(err){
-    //         res.sendStatus(401)
-    //     }
-    // },
+    login: async (req, res) => {
+        const db = req.app.get('db')
+        const { session } = req
+        const { email, password } = req.body
+        try {
+            const credentials = await db.login({email})
+            const authorized = bcrypt.compareSync(password, credentials[0].hashed_password)
+            if (authorized){
+                session.user = credentials[0]
+                res.status(200).send({user: session.user})
+            } else {
+                throw new Error(401)
+            }
+        } catch(err){
+            res.sendStatus(401)
+        }
+    },
 
     // logout: (req, res) => {
     //     req.session.destroy()
