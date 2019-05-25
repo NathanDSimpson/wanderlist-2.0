@@ -7,7 +7,9 @@
         display: none;
     }
 
-    .user-navbar{        
+    .user-menu{  
+        justify-content: right;
+
         i{
             cursor: pointer;
         }
@@ -15,7 +17,14 @@
         li{
             list-style: none;
             cursor: pointer;
+            text-align: right;
         }
+
+        .user-icon{
+            display: flex;
+            justify-content: flex-end;
+        }
+
     }
 
 }

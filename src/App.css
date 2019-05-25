@@ -4,11 +4,17 @@
   justify-content: space-between; }
   .page-header .hide {
     display: none; }
-  .page-header .user-navbar i {
-    cursor: pointer; }
-  .page-header .user-navbar li {
-    list-style: none;
-    cursor: pointer; }
+  .page-header .user-menu {
+    justify-content: right; }
+    .page-header .user-menu i {
+      cursor: pointer; }
+    .page-header .user-menu li {
+      list-style: none;
+      cursor: pointer;
+      text-align: right; }
+    .page-header .user-menu .user-icon {
+      display: flex;
+      justify-content: flex-end; }
 
 * {
   border: 1px solid silver; }

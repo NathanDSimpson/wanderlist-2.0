@@ -30,19 +30,37 @@ class Header extends Component{
     }
 
     render(){
+        let drowdownMenu
+        if (this.props.authenticated){
+            drowdownMenu = (
+                <ul>
+                    <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/items'); this.toggle_dropdown()}}>Items</li>
+                    <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/lists'); this.toggle_dropdown()}}>Lists</li>
+                    <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/trips'); this.toggle_dropdown()}}>Trips</li>
+                    <li className={this.state.dropdownClassName} onClick={() => {this.logoutUser(); this.toggle_dropdown()}}>Logout</li>
+                </ul>
+            )
+        } else {
+                drowdownMenu = (
+                    <ul>
+                        <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/login'); this.toggle_dropdown()}}>Log In</li>
+                        <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/register'); this.toggle_dropdown()}}>Register</li>
+                    </ul>
+                )
+        }
+
+        console.log(this.props)
         return(
             <header className='page-header'>
                 <div>WanderList</div>
                 <nav>
-                    <div className='user-navbar'>
-                        <i onClick={this.toggle_dropdown} className="fas fa-user"></i>
+                    <div className='user-menu'>
+                        <div className='user-icon'>
+                            <div>{this.props.authenticated ? this.props.firstname : null}</div>
+                            <i onClick={this.toggle_dropdown} className="fas fa-user"></i>
+                        </div>
                         <ul>
-                            <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/items')}}>Items</li>
-                            <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/lists')}}>Lists</li>
-                            <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/trips')}}>Trips</li>
-                            <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/login')}}>Log In</li>
-                            <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/register')}}>Register</li>
-                            <li className={this.state.dropdownClassName} onClick={this.logoutUser}>Logout</li>
+                            {drowdownMenu}
                         </ul>
                     </div>
                 </nav>
@@ -51,8 +69,13 @@ class Header extends Component{
     }
 }
 
+const mapStateToProps = (reduxState) => {
+    const { authenticated, firstname } = reduxState
+    return { authenticated, firstname} 
+}
+
 const mapDispatchToProps = {
     logoutUser
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Header))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
