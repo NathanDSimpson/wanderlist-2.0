@@ -7,8 +7,10 @@ module.exports = {
         const {firstname, lastname, email, password} = req.body
         const { session } = req
         try{
-            let alreadyRegistered = await db.checkForEmail({email})
-            alreadyRegistered = +alreadyRegistered[0].count
+            let response = await db.checkForEmail({email})
+            console.log(`response`, response)
+            alreadyRegistered = +response[0].count
+            console.log(`alreadyRegistered:`, alreadyRegistered)
             if (alreadyRegistered !== 0) {
                 return res.sendStatus(409)
             }
@@ -67,42 +69,38 @@ module.exports = {
     //     }
     // },
     
-    // getUserData: async (req, res) => {
-    //     try {
-    //         const db = req.app.get('db')
-    //         const { user_id } = req.body
-    //         const items = await db.getItems({user_id})
-    //         const lists = await db.getLists({user_id})
-    //         const trips = await db.getTrips({user_id})
-
-    //         // loop through lists to get the items for each
-    //         const lists_with_items = []
-    //         for (const list of lists){
-    //             const listItems = await db.getListItems({list_id: list.list_id}) 
-    //             lists_with_items.push({
-    //                 ...list,
-    //                 list_items: listItems
-    //             })
-    //         }
-
-    //         // loop through trips to get the lists for each
-    //         const trips_with_lists = []
-    //         for (const trip of trips){
-    //             const tripLists = await db.getTripLists({trip_id: trip.trip_id}) 
-
-    //             trips_with_lists.push({
-    //                 ...trip,
-    //                 trip_lists: tripLists
-    //             })
-    //         }
-
-    //         // send back all of the users data
-    //         const userData = {items, lists_with_items, trips_with_lists}
-    //         res.status(200).send(userData)
-    //     } catch(err){
-    //         res.sendStatus(401)
-    //     }
-	// },
+    getUserData: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const { user_id } = req.body
+            const items = await db.getItems({user_id})
+            const lists = await db.getLists({user_id})
+            const trips = await db.getTrips({user_id})
+            // loop through lists to get the items for each
+            const lists_with_items = []
+            for (const list of lists){
+                const listItems = await db.getListItems({list_id: list.list_id}) 
+                lists_with_items.push({
+                    ...list,
+                    list_items: listItems
+                })
+            }
+            // loop through trips to get the lists for each
+            const trips_with_lists = []
+            for (const trip of trips){
+                const tripLists = await db.getTripLists({trip_id: trip.trip_id}) 
+                trips_with_lists.push({
+                    ...trip,
+                    trip_lists: tripLists
+                })
+            }
+            // send back all of the users data
+            const userData = {items, lists_with_items, trips_with_lists}
+            res.status(200).send(userData)
+        } catch(err){
+            res.sendStatus(401)
+        }
+	},
 
     // addItem: async (req, res) => {
     //     const db = req.app.get('db')

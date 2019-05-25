@@ -45,7 +45,7 @@ app.post('/auth/login', controller.login)
 
 
 // // items
-// app.post('/api/user-data', controller.getUserData)
+app.post('/api/user-data', controller.getUserData)
 // app.post('/api/items', controller.getUserItems)
 // app.post('/api/add-item', controller.addItem) 
 // app.put('/api/edit-item', controller.editItem)

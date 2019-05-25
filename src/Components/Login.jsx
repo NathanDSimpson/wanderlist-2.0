@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { getUserData, loginUser } from '../redux/reducer' 
+import { connect } from 'react-redux'
 
 class Login extends Component{
     state = {
@@ -23,13 +25,11 @@ class Login extends Component{
         try {
             // verify login credentials with db
             const response = await axios.post('/auth/login', { email, password }) // log in
-            // const { user_id, firstname, lastname} = response.data.user
-            // this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
-            // // get user's lists, trips, and items from db
-            // const res = await axios.post('/api/user-data', {user_id})
-            // this.props.getUserData(res.data)
-            // // navigate the user
-            // this.props.history.push('/items') // navigate to the users items view
+            const { user_id, firstname, lastname} = response.data.user
+            this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
+            // get user's lists, trips, and items from db
+            const res = await axios.post('/api/user-data', {user_id})
+            this.props.getUserData(res.data)
         } catch(err){
             Swal.fire({
                 type: 'error',
@@ -74,4 +74,9 @@ class Login extends Component{
     }
 }
 
-export default withRouter(Login)
+const mapDispatchToProps = {
+    loginUser,
+    getUserData
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Login))
