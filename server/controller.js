@@ -8,9 +8,7 @@ module.exports = {
         const { session } = req
         try{
             let response = await db.checkForEmail({email})
-            console.log(`response`, response)
             alreadyRegistered = +response[0].count
-            console.log(`alreadyRegistered:`, alreadyRegistered)
             if (alreadyRegistered !== 0) {
                 return res.sendStatus(409)
             }
@@ -48,10 +46,10 @@ module.exports = {
         }
     },
 
-    // logout: (req, res) => {
-    //     req.session.destroy()
-    //     res.sendStatus(200)
-    //   },
+    logout: (req, res) => {
+        req.session.destroy()
+        res.sendStatus(200)
+      },
 
     // continueSession: (req, res) => {
     //     const { session } = req

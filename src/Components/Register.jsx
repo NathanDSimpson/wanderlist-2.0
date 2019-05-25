@@ -23,6 +23,7 @@ class Register extends Component{
 
     handleSubmit = async event => {
         event.preventDefault()
+        this.props.history.push('/')
         const { firstname, lastname, email, password, confirmPassword } = this.state
         if (password !== confirmPassword){
             Swal.fire({
