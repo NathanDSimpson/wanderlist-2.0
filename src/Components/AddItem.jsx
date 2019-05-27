@@ -9,11 +9,17 @@ class AddItem extends Component {
     constructor(){
         super()
         this.state = {
-            // name: this.props.item,
+            name: '',
             img_url: '',
             description: '',
             tags: ''
         }
+    }
+
+    componentWillMount(){
+        this.setState({
+            name:  this.props.item_name
+        })
     }
 
     // track user inputs via local state
@@ -27,10 +33,10 @@ class AddItem extends Component {
     // submit from local state to the db, then update redux state with the db response
     handleSubmit = async (event) => {
         event.preventDefault()
-        const { img_url, description, tags } = this.state
+        const { img_url, description, tags, name } = this.state
         try {
             // add to db
-            await axios.post('/api/add-item', { user_id: this.props.user_id, name: this.props.item, img_url, description, tags }) 
+            await axios.post('/api/add-item', { user_id: this.props.user_id, name, img_url, description, tags }) 
             // get updated info from db for redux
             const res = await axios.post('/api/user-data', {user_id: this.props.user_id})
             // update redux
@@ -53,6 +59,7 @@ class AddItem extends Component {
     }
 
     render(){
+        // let item_name = this.state.name
         return(
             <>
             <div className='add-item-form'>
@@ -63,7 +70,7 @@ class AddItem extends Component {
                         type="text" 
                         name='name' 
                         placeholder='Name'
-                        value={this.props.item}
+                        value={this.state.name}
                     />
                     <input 
                         className='form-entry'

@@ -50,7 +50,7 @@ class ItemWizard extends Component{
         return(
             
             <main>
-                {this.state.add_item ? <AddItem item={this.state.newItem} toggleAdd={this.toggle_add_item}/> : (
+                {this.state.add_item ? <AddItem item_name={this.state.newItem} toggleAdd={this.toggle_add_item}/> : (
                     <div>
                         <nav className='search-and-additem-bar'>
                             <div className='add-item'>
