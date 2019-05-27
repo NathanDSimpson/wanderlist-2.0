@@ -21,7 +21,7 @@ class Login extends Component{
 
     handleSubmit = async (event) => {
         event.preventDefault()
-        this.props.history.push('/items')
+        this.props.history.push('/library')
         const { email, password } = this.state
         try {
             // verify login credentials with db

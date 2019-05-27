@@ -14,7 +14,7 @@ export default (
         <Route exact path='/' component={Home}/>
         <Route path='/login' component={Login}/>
         <Route path='/register' component={Register}/>
-        <Route path='/items' component={Library}/>
+        <Route path='/library' component={Library}/>
         <Route path='/lists' component={Lists}/>
         <Route path='/trips' component={Trips}/>
     </Switch>

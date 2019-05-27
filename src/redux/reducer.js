@@ -6,13 +6,20 @@ const initialState = {
 	email: '',
 	items: [],
 	lists: [],
-	trips: []
+	trips: [],
+	selected_item: null,
+	selected_list: null,
+	selected_trip: null
 }
 
 const REGISTER_USER = 'REGISTER_USER'
 const LOGIN_USER = 'LOGIN_USER'
 const GET_USER_DATA = 'GET_USER_DATA'
 const LOGOUT_USER = 'LOGOUT_USER'
+const SELECTED_ITEM = 'SELECTED_ITEM'
+// const SELECTED_LIST = 'SELECTED_LIST'
+// const SELECTED_TRIP = 'SELECTED_TRIP'
+
 
 
 export function registerUser(obj) {
@@ -42,6 +49,27 @@ export function logoutUser(obj) {
 		payload: obj
 	}
 }
+
+export function select_item(item_id) {
+	return {
+		type: SELECTED_ITEM,
+		payload: item_id
+	}
+}
+// export function select_list(list_id) {
+// 	return {
+// 		type: SELECTED_LIST,
+// 		payload: list_id
+// 	}
+// }
+
+// export function select_trip(trip_id) {
+// 	return {
+// 		type: SELECTED_TRIP,
+// 		payload: trip_id
+// 	}
+// }
+
 
 export default function reducer(state = initialState, action) {
 	const { type, payload } = action
@@ -81,6 +109,11 @@ export default function reducer(state = initialState, action) {
 			items: [],
 			lists: [],
 			trips: []
+	}
+		case SELECTED_ITEM:
+		return { 
+			...state, 
+			selected_item: payload.item_id
 	}
 		default:
 			return state

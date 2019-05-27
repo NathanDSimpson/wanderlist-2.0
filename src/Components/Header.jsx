@@ -34,7 +34,7 @@ class Header extends Component{
         if (this.props.authenticated){
             drowdownMenu = (
                 <ul>
-                    <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/items'); this.toggle_dropdown()}}>Items</li>
+                    <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/library'); this.toggle_dropdown()}}>Items</li>
                     <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/lists'); this.toggle_dropdown()}}>Lists</li>
                     <li className={this.state.dropdownClassName} onClick={() => {this.props.history.push('/trips'); this.toggle_dropdown()}}>Trips</li>
                     <li className={this.state.dropdownClassName} onClick={() => {this.logoutUser(); this.toggle_dropdown()}}>Logout</li>
