@@ -1,0 +1,14 @@
+.item-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    img{
+        height: 50vw;
+        width: 55vw;
+    }
+
+}

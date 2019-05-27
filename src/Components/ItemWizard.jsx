@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import ItemIcon from './ItemIcon'
 import AddItem from './AddItem'
 
@@ -33,7 +32,7 @@ class ItemWizard extends Component{
         let items
         if (this.state.searchValue === ''){
             items = this.props.items.map(item => (
-                <ItemIcon item={item} key={item.item_id}/>
+                <ItemIcon item={item} key={item.item_id} toggle_view_item={this.props.toggle_view_item}/>
             ))
         } else {
             let filtered_items = this.props.items.filter(item => {
@@ -44,7 +43,7 @@ class ItemWizard extends Component{
                 return searchIn.includes(searchFor) 
             })
             items = filtered_items.map(item => (
-                <ItemIcon item={item} key={item.item_id}/>
+                <ItemIcon item={item} key={item.item_id} toggle_view_item={this.props.toggle_view_item}/>
             ))
         }
 
@@ -87,4 +86,4 @@ const mapStateToProps = (reduxState) => {
     return { authenticated, user_id, items }
 }
 
-export default connect(mapStateToProps, null)(withRouter(ItemWizard))
+export default connect(mapStateToProps, null)(ItemWizard)

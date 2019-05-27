@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import ItemWizard from './ItemWizard'
 import ItemDetails from './ItemDetails'
 
@@ -10,7 +9,6 @@ class Library extends Component{
         super()
         this.state = {
             viewItem: false,
-            selected_item_id: 0,
         }
     }
 
@@ -23,7 +21,11 @@ class Library extends Component{
     render(){
         return(
             <main>
-                {this.state.viewItem ? null : <ItemWizard/>}
+                {this.state.viewItem 
+                ? 
+                <ItemDetails item_id={this.props.selected_item} toggle_view_item={this.toggle_view_item}/> 
+                : 
+                <ItemWizard toggle_view_item={this.toggle_view_item}/>}
             </main>
         )
     }
@@ -34,4 +36,4 @@ const mapStateToProps = (reduxState) => {
     return { authenticated, items }
 }
 
-export default connect(mapStateToProps, null)(withRouter(Library))
+export default connect(mapStateToProps, null)(Library)

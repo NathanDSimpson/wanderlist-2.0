@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { select_item } from '../redux/reducer'
 
@@ -7,8 +6,9 @@ class ItemIcon extends Component{
 
     view_item = () => {
         this.props.select_item({item_id: this.props.item.item_id})
+        this.props.toggle_view_item()
     }
-
+    
     render(){
         let url = this.props.item.img_url !== '' ? this.props.item.img_url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQoANe0YNquFbkjBKomnGyoG7CNvYbq153oAOW3DEs-iDA7s5y'
         return(
@@ -33,4 +33,4 @@ const mapDispatchToProps = {
     select_item
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(ItemIcon))
+export default connect(null, mapDispatchToProps)(ItemIcon)
