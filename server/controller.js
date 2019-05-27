@@ -51,10 +51,10 @@ module.exports = {
         res.sendStatus(200)
       },
 
-    // continueSession: (req, res) => {
-    //     const { session } = req
-    //     res.status(200).send(session.user)
-    // },
+    continueSession: (req, res) => {
+        const { session } = req
+        res.status(200).send(session.user)
+    },
 
     // getUserItems: async (req, res) => {
     //     try {

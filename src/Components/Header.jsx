@@ -2,12 +2,34 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
-import { logoutUser } from '../redux/reducer'
+import { logoutUser, loginUser, getUserData } from '../redux/reducer'
 import axios from 'axios'
 
 class Header extends Component{
     state = {
         dropdownClassName: ''
+    }
+
+    // Check if the server has a session
+    // dispatch user_id from session to db to get info and update redux
+    async componentWillMount(){
+        try {
+            const res = await axios.get('/auth/continue-session')
+            const { user_id, firstname, lastname, email } = res.data
+            if (res.data){ // res.data is an empty sting if there is no the server has no session
+                this.props.loginUser({ user_id, firstname, lastname, email, authenticated: true })
+                const res = await axios.post('/api/user-data', {user_id})
+                this.props.getUserData(res.data)
+            } else {
+                this.props.history.push('/')
+            }
+        } catch(err){
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Please refresh your page and log in again.'
+              })        
+        }
     }
 
     // toggle the classNames of the dropdown list items to use display: none in styling    
@@ -76,7 +98,9 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    logoutUser
+    logoutUser,
+    loginUser,
+    getUserData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
