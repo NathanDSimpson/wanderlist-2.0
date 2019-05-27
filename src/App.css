@@ -27,6 +27,7 @@
   flex-wrap: wrap; }
 
 .item-icon {
+  cursor: pointer;
   height: 18vw;
   width: 18 vw; }
   .item-icon img {
@@ -35,6 +36,9 @@
 
 .item-name {
   text-align: center; }
+
+button {
+  cursor: pointer; }
 
 * {
   border: 1px solid silver; }

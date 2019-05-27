@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ItemIcon from './ItemIcon'
+import AddItem from './AddItem'
 
 
 class ItemWizard extends Component{
@@ -9,7 +10,8 @@ class ItemWizard extends Component{
         super()
         this.state = {
             newItem: '',
-            searchValue: ''
+            searchValue: '',
+            add_item: false
         }
     }
 
@@ -21,8 +23,13 @@ class ItemWizard extends Component{
         })
     }
 
+    toggle_add_item = () => {
+        this.setState({
+            add_item: !this.state.add_item
+        })
+    }
+
     render(){
-        console.log(`this.props`, this.props)
         let items
         if (this.state.searchValue === ''){
             items = this.props.items.map(item => (
@@ -42,29 +49,34 @@ class ItemWizard extends Component{
         }
 
         return(
+            
             <main>
-                <nav className='search-and-additem-bar'>
-                    <div className='add-item'>
-                        <i className="fas fa-plus"></i>
-                        <input 
+                {this.state.add_item ? <AddItem item={this.state.newItem} toggleAdd={this.toggle_add_item}/> : (
+                    <div>
+                        <nav className='search-and-additem-bar'>
+                            <div className='add-item'>
+                                <i className="fas fa-plus" onClick={this.toggle_add_item}></i>
+                                <input 
+                                        className='form-entry'
+                                        onChange={this.handleInput} 
+                                        type="text" 
+                                        name='newItem' 
+                                        placeholder='add item'
+                                />
+                            </div>
+                            <input className='search-bar'
                                 className='form-entry'
                                 onChange={this.handleInput} 
                                 type="text" 
-                                name='newItem' 
-                                placeholder='add item'
-                        />
+                                name='searchValue' 
+                                placeholder='search'
+                            />
+                        </nav>
+                        <div className='item-icons'>
+                            {items}
+                        </div>
                     </div>
-                    <input className='search-bar'
-                        className='form-entry'
-                        onChange={this.handleInput} 
-                        type="text" 
-                        name='searchValue' 
-                        placeholder='search'
-                    />
-                </nav>
-                <div className='item-icons'>
-                    {items}
-                </div>
+                )}
             </main>
         )
     }

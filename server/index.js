@@ -32,7 +32,7 @@ massive(CONNECTION_STRING)
 //point your server to your front end static files. This tells express to look for a build folder. 
 //The __dirname variable tells it to start at the current file where Node is running (i.e., your server file), 
 //and /../build tells it to then go up one file and into a build folder. 
-app.use( express.static( `${__dirname}/../build` ) );
+// app.use( express.static( `${__dirname}/../build` ) );
 
 
 //ENDPOINTS
@@ -47,7 +47,7 @@ app.get('/auth/logout', controller.logout)
 // // items
 app.post('/api/user-data', controller.getUserData)
 // app.post('/api/items', controller.getUserItems)
-// app.post('/api/add-item', controller.addItem) 
+app.post('/api/add-item', controller.addItem) 
 // app.put('/api/edit-item', controller.editItem)
 // app.post('/api/delete', controller.deleteItem) 
 

@@ -100,15 +100,15 @@ module.exports = {
         }
 	},
 
-    // addItem: async (req, res) => {
-    //     const db = req.app.get('db')
-    //     try {
-    //         await db.addItem(req.body)
-    //         res.sendStatus(200)
-    //     } catch(err){
-    //         res.sendStatus(401)
-    //     }
-    // },
+    addItem: async (req, res) => {
+        const db = req.app.get('db')
+        try {
+            await db.addItem(req.body)
+            res.sendStatus(200)
+        } catch(err){
+            res.sendStatus(401)
+        }
+    },
 
     // editItem: async (req, res) => {
     //     const db = req.app.get('db')
