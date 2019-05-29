@@ -28,10 +28,10 @@ massive(CONNECTION_STRING)
     })
 })
 
-// for production build
-//point your server to your front end static files. This tells express to look for a build folder. 
-//The __dirname variable tells it to start at the current file where Node is running (i.e., your server file), 
-//and /../build tells it to then go up one file and into a build folder. 
+// // for production build
+// // point your server to your front end static files. This tells express to look for a build folder. 
+// // The __dirname variable tells it to start at the current file where Node is running (i.e., your server file), 
+// // and /../build tells it to then go up one file and into a build folder. 
 // app.use( express.static( `${__dirname}/../build` ) );
 
 
@@ -68,7 +68,7 @@ app.post('/api/add-item', controller.addItem)
 
 // app.post('/api/list-items', controller.getListItems)
 
-// for production build
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+// // for production build
+// app.get('*', (req, res)=>{
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// });

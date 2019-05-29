@@ -6,35 +6,90 @@
 -- --     hashed_password text not null
 -- -- );
 
--- --   so_id INTEGER REFERENCES so_headers(id),
+create table items (
+    item_id serial primary key not null,
+    user_id integer references users(user_id) not null,
+    name varchar not null,
+    img_url text,
+    weight float,
+    volume float,
+    description text,
+    tags text
+);
+
+create table lists (
+    list_id serial primary key not null,
+    user_id integer references users(user_id) not null,
+    name varchar,
+    description text,
+    tags
+);
+
+create table trips (
+    trip_id serial primary key not null,
+    user_id integer references users(user_id) not null,
+    name varchar not null,
+    description text,
+    tags
+);
+
+create table list_items (
+    list_item_id serial primary key not null,
+    item_id integer references items(item_id) not null,
+    list_id integer references lists(list_id) not null,
+    quantity integer
+);
+
+create table trip_lists (
+    trip_list_id serial primary key not null,
+    trip_id references trips(trip_id) integer not null,
+    list_id references lists(list_id) integer not null
+);
 
 
--- create table trips (
---     trip_id serial primary key not null,
---     user_id integer references users(user_id)  not null,
---     name varchar not null,
---     description text,
---     tags
--- );
 
--- create table lists (
---     list_id serial primary key not null,
---     user_id integer references users(user_id) not null,
---     name varchar,
---     description text,
---     tags
--- );
 
--- create table items (
---     item_id serial primary key not null,
---     user_id integer references users(user_id) not null,
---     name varchar not null,
---     img_url text,
---     weight float,
---     volume float,
---     description text,
---     tags text
--- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 insert into items (

@@ -16,6 +16,7 @@ class AddItem extends Component {
         }
     }
 
+    //Set the inital value for name from what was entered in the item wizard input field
     componentWillMount(){
         this.setState({
             name:  this.props.item_name
@@ -59,7 +60,6 @@ class AddItem extends Component {
     }
 
     render(){
-        // let item_name = this.state.name
         return(
             <>
             <div className='add-item-form'>
