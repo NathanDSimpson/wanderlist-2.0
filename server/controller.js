@@ -120,16 +120,15 @@ module.exports = {
     //     }
     // },
 
-    // deleteItem: async (req, res) => {
-    //     const db = req.app.get('db')
-    //     try {
-    //         const {item_id} = req.body
-    //         await db.deleteItem({item_id})           
-    //         res.sendStatus(200)
-    //     } catch(err){
-    //         res.sendStatus(401)
-    //     }
-    // },
+    deleteItem: async (req, res) => {
+        const db = req.app.get('db')
+        try {
+            await db.deleteItem({item_id: req.body.item_id})           
+            res.sendStatus(200)
+        } catch(err){
+            res.sendStatus(401)
+        }
+    },
 
     // getUserLists: async (req, res) => {
     //     try {

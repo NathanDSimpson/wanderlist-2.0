@@ -45,7 +45,7 @@ class AddItem extends Component {
             Swal.fire({
                 position: 'top-end',
                 type: 'success',
-                title: 'Item added sucessfully!',
+                title: 'Item added successfully!',
                 showConfirmButton: false,
                 timer: 1500
               })

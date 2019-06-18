@@ -48,8 +48,20 @@ button {
     list-style: none;
     padding: 0; }
   .item-details img {
-    height: 50vw;
-    width: 55vw; }
+    height: 35vw;
+    width: 40vw; }
+
+.item-details-main {
+  display: flex;
+  justify-content: space-evenly; }
+  .item-details-main div {
+    cursor: pointer; }
+
+.none {
+  display: none; }
+
+.fas {
+  cursor: pointer; }
 
 * {
   border: 1px solid silver; }
