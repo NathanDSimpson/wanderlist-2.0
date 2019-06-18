@@ -1,4 +1,4 @@
-update items
+update item
    set 
         name = ${name},
         img_url = ${img_url},

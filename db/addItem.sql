@@ -1,4 +1,4 @@
-insert into items (
+insert into item (
     user_id,
     name,
     img_url,

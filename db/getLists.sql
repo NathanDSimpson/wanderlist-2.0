@@ -1,3 +1,4 @@
 -- ALL LISTS FOR A USER
-select * from lists
+select * from list
 where user_id = ${user_id};
+

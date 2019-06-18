@@ -6,9 +6,15 @@
 -- --     hashed_password text not null
 -- -- );
 
-create table items (
+drop table if exists item cascade;
+drop table if exists list cascade;
+drop table if exists list_item cascade;
+drop table if exists trip cascade;
+drop table if exists trip_list cascade;
+
+create table item (
     item_id serial primary key not null,
-    user_id integer references users(user_id) not null,
+    user_id integer references users(user_id) on delete cascade,
     name varchar not null,
     img_url text,
     weight float,
@@ -17,82 +23,37 @@ create table items (
     tags text
 );
 
-create table lists (
+create table list (
     list_id serial primary key not null,
-    user_id integer references users(user_id) not null,
+    user_id integer references users(user_id) on delete cascade,
     name varchar,
     description text,
-    tags
+    tags text
 );
 
-create table trips (
+create table trip (
     trip_id serial primary key not null,
-    user_id integer references users(user_id) not null,
+    user_id integer references users(user_id) on delete cascade,
     name varchar not null,
     description text,
-    tags
+    tags text
 );
 
-create table list_items (
+create table list_item (
     list_item_id serial primary key not null,
-    item_id integer references items(item_id) not null,
-    list_id integer references lists(list_id) not null,
+    item_id integer references item(item_id) on delete cascade,
+    list_id integer references list(list_id) on delete cascade,
     quantity integer
 );
 
-create table trip_lists (
+create table trip_list (
     trip_list_id serial primary key not null,
-    trip_id references trips(trip_id) integer not null,
-    list_id references lists(list_id) integer not null
+    trip_id integer references trip(trip_id) on delete cascade,
+    list_id integer references list(list_id) on delete cascade
 );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-insert into items (
+insert into item (
     user_id,
     name,
     description,
@@ -169,7 +130,7 @@ insert into items (
     '#groceries'
 )
 ,(
-    ,
+    1,
     'Nails',
     '',
     'https://image.dhgate.com/0x0/f2/albu/g4/M00/A0/7B/rBVaEVnA5a-AMQxgAADZqtdiIkg731.jpg',
@@ -230,4 +191,103 @@ insert into items (
     '',
     'https://st.hzcdn.com/simgs/8dd1f695064a66eb_4-3555/home-design.jpg',
     '#hardware #projects #construction'
+);
+
+insert into list (
+    user_id,
+    name,
+    description
+) values (
+    1,
+    'Weekend Backpacking',
+    'Having fun in the Utah Backcountry'
+),(
+    1,
+    'MTB Ride',
+    'Get out and pedal your bike for the day'
+);
+
+
+insert into list_item (
+    item_id,
+    list_id,
+    quantity
+) values (
+    5,
+    2,
+    null
+),(
+    6,
+    2,
+    null
+),(
+    7,
+    2,
+    null
+),(
+    8,
+    2,
+    null
+),(
+    9,
+    2,
+    null
+),(
+    10,
+    2,
+    null
+),(
+    11,
+    2,
+    null
+),(
+    12,
+    2,
+    null
+),(
+    13,
+    2,
+    null
+),(
+    14,
+    2,
+    null
+),(
+    1,
+    1,
+    null
+),(
+    2,
+    1,
+    null
+),(
+    3,
+    1,
+    null
+),(
+    4,
+    1,
+    null
+);
+
+
+insert into trip (
+    user_id,
+    name,
+    description
+) values (
+    1,
+    'Road Trip',
+    'Utah Backpacking and Mountain Biking.'
+);
+
+insert into trip_list (
+    trip_id,
+    list_id
+) values (
+    1,
+    1
+),(
+    1,
+    2
 );
