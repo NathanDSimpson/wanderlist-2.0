@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import { getUserData } from '../redux/reducer'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import EditItem from './EditItem'
 
 class ItemDetails extends Component{
     constructor(){
         super()
         this.state = {
             item: null,
-            showMenu: false
+            showMenu: false,
+            editItem: false
         }
     }
 
@@ -22,9 +24,24 @@ class ItemDetails extends Component{
         })
     }
 
+    updateItemInfo = () => {
+        let item = this.props.items.filter(item => {
+            return item.item_id === this.props.selected_item
+        })
+        this.setState({
+            item: item[0]
+        })
+    }
+
     toggleMenu = () => {
         this.setState({
             showMenu: !this.state.showMenu
+        })
+    }
+    
+    toggleEdit = () => {
+        this.setState({
+            editItem: !this.state.editItem
         })
     }
 
@@ -52,10 +69,10 @@ class ItemDetails extends Component{
 
 
     render(){
-        let {item} = this.state
-        let expandMenu = this.state.showMenu ? 'none' : ''
-        let itemMenu = this.state.showMenu ? '': 'none'
-        return(      
+        const {item} = this.state
+        const expandMenu = this.state.showMenu ? 'none' : ''
+        const itemMenu = this.state.showMenu ? '': 'none'
+        const itemDetails = (
             <div>
                 <div onClick={this.props.toggle_view_item}>
                     <i className="fas fa-chevron-left"></i>
@@ -78,11 +95,19 @@ class ItemDetails extends Component{
                     <div>
                         <div className={expandMenu} onClick={this.toggleMenu}> Expand Menu</div>
                         <div className={itemMenu} onClick={this.toggleMenu}> Back</div>
-                        <div className={itemMenu} > Edit Item </div>
+                        <div className={itemMenu} onClick={this.toggleEdit}> Edit Item </div>
                         <div className={itemMenu} onClick={this.deleteItem} > Delete Item</div>
                         <div className={itemMenu} > Add Item to List</div>
                     </div>
                 </div>
+            </div>
+        )
+
+        console.log(`111`, this.props)
+
+        return(      
+            <div>
+                {this.state.editItem ? <EditItem item={this.state.item} toggleEdit={this.toggleEdit} updateItemInfo={this.updateItemInfo}/> : itemDetails}
             </div>     
         )
     }

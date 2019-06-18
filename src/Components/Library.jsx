@@ -23,7 +23,7 @@ class Library extends Component{
             <main>
                 {this.state.viewItem 
                 ? 
-                <ItemDetails item_id={this.props.selected_item} toggle_view_item={this.toggle_view_item}/> 
+                <ItemDetails toggle_view_item={this.toggle_view_item}/> 
                 : 
                 <ItemWizard toggle_view_item={this.toggle_view_item}/>}
             </main>

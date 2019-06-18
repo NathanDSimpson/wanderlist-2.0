@@ -48,7 +48,7 @@ app.get('/auth/continue-session', controller.continueSession)
 app.post('/api/user-data', controller.getUserData)
 // app.post('/api/items', controller.getUserItems)
 app.post('/api/add-item', controller.addItem) 
-// app.put('/api/edit-item', controller.editItem)
+app.put('/api/edit-item', controller.editItem)
 app.post('/api/delete', controller.deleteItem) 
 
 // //lists
